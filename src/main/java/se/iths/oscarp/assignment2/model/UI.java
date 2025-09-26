@@ -12,12 +12,10 @@ public class UI {
                 3: Search Product
                 4: Exit""");
 
-//        int choice = input.nextInt();
         return input.nextInt();
     }
 
-    public String question(String question) {
+    public void question(String question) {
         System.out.println(question);
-        return question;
     }
 }

@@ -19,14 +19,6 @@ public class Application {
         boolean onOff = true;
         while (onOff) {
 
-//            System.out.println("""
-//                    1: Show All Products
-//                    2: Add Product
-//                    3: Search Product
-//                    4: Exit""");
-//
-//            int choice = sc.nextInt();
-//            sc.nextLine();
             int choice = ui.menu();
 
             switch (choice) {
@@ -50,11 +42,7 @@ public class Application {
     }
 
     public void addProduct() {
-        ProductDao proDao = new ProductDao();
-        UI ui = new UI();
         ui.question("Add Product");
-//        System.out.println("Enter Product Name: ");
-//        System.out.println("Enter Product Name: ");
     }
 
     public void findProduct() {
