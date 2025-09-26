@@ -1,4 +1,4 @@
-package se.iths.oscarp.assignment2;
+package se.iths.oscarp.assignment2.model;
 
 public class Tool extends Product {
 
