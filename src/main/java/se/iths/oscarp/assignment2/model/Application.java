@@ -14,7 +14,6 @@ public class Application {
     }
 
     public void startApplication() {
-        ProductDao productDao = new ProductDao();
 
         boolean onOff = true;
         while (onOff) {
@@ -22,7 +21,7 @@ public class Application {
             int choice = ui.menu();
 
             switch (choice) {
-                case 1 -> printAllProducts(productDao);
+                case 1 -> printAllProducts();
                 case 2 -> addProduct();
                 case 3 -> findProduct();
                 case 4 -> {
@@ -33,7 +32,7 @@ public class Application {
         }
     }
 
-    public void printAllProducts(ProductDao productDao) {
+    public void printAllProducts() {
         for (Product p : productDao.getAllProducts()) {
             System.out.println(p);
             p.category();
@@ -42,7 +41,68 @@ public class Application {
     }
 
     public void addProduct() {
-        ui.question("Add Product");
+        ui.question("What kind of product do you want to add?");
+        ui.question("Books, Electronics or Tools");
+
+        String type = sc.nextLine().trim().toLowerCase();
+
+        switch (type) {
+            case "books" -> {
+                ui.question("Input article number");
+                int articleNumber = sc.nextInt();
+                sc.nextLine();
+
+                ui.question("Input product name");
+                String productName = sc.nextLine();
+
+                ui.question("Input product price");
+                double productPrice = sc.nextDouble();
+                sc.nextLine();
+
+                ui.question("Input product description");
+                String productDescription = sc.nextLine();
+
+                Product newBook = new Book(articleNumber, productName, productPrice, productDescription);
+                productDao.addProduct(newBook);
+            }
+            case "electronics" -> {
+                ui.question("Input article number");
+                int articleNumber = sc.nextInt();
+                sc.nextLine();
+
+                ui.question("Input product name");
+                String productName = sc.nextLine();
+
+                ui.question("Input product price");
+                double productPrice = sc.nextDouble();
+                sc.nextLine();
+
+                ui.question("Input product description");
+                String productDescription = sc.nextLine();
+
+                Product newElectronic = new Electronic(articleNumber, productName, productPrice, productDescription);
+                productDao.addProduct(newElectronic);
+            }
+            case "tools" -> {
+                ui.question("Input article number");
+                int articleNumber = sc.nextInt();
+                sc.nextLine();
+
+                ui.question("Input product name");
+                String productName = sc.nextLine();
+
+                ui.question("Input product price");
+                double productPrice = sc.nextDouble();
+                sc.nextLine();
+
+                ui.question("Input product description");
+                String productDescription = sc.nextLine();
+
+                Product newTool = new Tool(articleNumber, productName, productPrice, productDescription);
+                productDao.addProduct(newTool);
+            }
+            default -> ui.error("Invalid choice.");
+        }
     }
 
     public void findProduct() {
@@ -58,5 +118,4 @@ public class Application {
             System.out.println("Product not found");
         }
     }
-
 }

@@ -18,4 +18,8 @@ public class UI {
     public void question(String question) {
         System.out.println(question);
     }
+
+    public void error(String error) {
+        System.out.println(error);
+    }
 }

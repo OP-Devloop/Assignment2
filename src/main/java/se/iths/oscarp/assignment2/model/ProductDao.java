@@ -40,7 +40,7 @@ public class ProductDao {
         return new ArrayList<>(products);
     }
 
-    public void addProducts(Product product) {
+    public void addProduct(Product product) {
         products.add(product);
     }
 
