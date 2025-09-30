@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Application {
     private Scanner sc = new Scanner(System.in);
     private ProductDao productDao;
-    private UI ui;
+    private ScannerUI scannerUi;
 
 
-    public Application(ProductDao productDao, UI ui) {
+    public Application(ProductDao productDao, ScannerUI scannerUi) {
         this.productDao = productDao;
-        this.ui = ui;
+        this.scannerUi = scannerUi;
     }
 
     public void startApplication() {
@@ -18,7 +18,7 @@ public class Application {
         boolean onOff = true;
         while (onOff) {
 
-            int choice = ui.menu();
+            int choice = scannerUi.menu();
 
             switch (choice) {
                 case 1 -> printAllProducts();
@@ -41,67 +41,67 @@ public class Application {
     }
 
     public void addProduct() {
-        ui.question("What kind of product do you want to add?");
-        ui.question("Books, Electronics or Tools");
+        scannerUi.question("What kind of product do you want to add?");
+        scannerUi.question("Books, Electronics or Tools");
 
         String type = sc.nextLine().trim().toLowerCase();
 
         switch (type) {
             case "books" -> {
-                ui.question("Input article number");
+                scannerUi.question("Input article number");
                 int articleNumber = sc.nextInt();
                 sc.nextLine();
 
-                ui.question("Input product name");
+                scannerUi.question("Input product name");
                 String productName = sc.nextLine();
 
-                ui.question("Input product price");
+                scannerUi.question("Input product price");
                 double productPrice = sc.nextDouble();
                 sc.nextLine();
 
-                ui.question("Input product description");
+                scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newBook = new Book(articleNumber, productName, productPrice, productDescription);
                 productDao.addProduct(newBook);
             }
             case "electronics" -> {
-                ui.question("Input article number");
+                scannerUi.question("Input article number");
                 int articleNumber = sc.nextInt();
                 sc.nextLine();
 
-                ui.question("Input product name");
+                scannerUi.question("Input product name");
                 String productName = sc.nextLine();
 
-                ui.question("Input product price");
+                scannerUi.question("Input product price");
                 double productPrice = sc.nextDouble();
                 sc.nextLine();
 
-                ui.question("Input product description");
+                scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newElectronic = new Electronic(articleNumber, productName, productPrice, productDescription);
                 productDao.addProduct(newElectronic);
             }
             case "tools" -> {
-                ui.question("Input article number");
+                scannerUi.question("Input article number");
                 int articleNumber = sc.nextInt();
                 sc.nextLine();
 
-                ui.question("Input product name");
+                scannerUi.question("Input product name");
                 String productName = sc.nextLine();
 
-                ui.question("Input product price");
+                scannerUi.question("Input product price");
                 double productPrice = sc.nextDouble();
                 sc.nextLine();
 
-                ui.question("Input product description");
+                scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newTool = new Tool(articleNumber, productName, productPrice, productDescription);
                 productDao.addProduct(newTool);
             }
-            default -> ui.error("Invalid choice.");
+            default -> scannerUi.error("Invalid choice.");
         }
     }
 

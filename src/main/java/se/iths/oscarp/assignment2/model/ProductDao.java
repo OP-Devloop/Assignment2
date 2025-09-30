@@ -3,7 +3,7 @@ package se.iths.oscarp.assignment2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao {
+public class ProductDao implements ProductUI {
 
     private List<Product> products;
 
@@ -36,14 +36,17 @@ public class ProductDao {
         this.products = products;
     }
 
+    @Override
     public List<Product> getAllProducts() {
         return new ArrayList<>(products);
     }
 
+    @Override
     public void addProduct(Product product) {
         products.add(product);
     }
 
+    @Override
     public Product findProductById(int articleNumber) {
         for (Product product : products) {
             if (product.getArticleNumber() == articleNumber) {
