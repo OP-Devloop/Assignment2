@@ -12,10 +12,6 @@ public class FileProductDao implements ProductUI {
 
     public void loadFromFile(Path path) {
         products.clear();
-        if (Files.notExists(path)) {
-            System.err.println("Product file does not exist");
-            return;
-        }
         try {
             List<String> lines = Files.readAllLines(path);
             for (String line : lines) {
@@ -44,7 +40,6 @@ public class FileProductDao implements ProductUI {
     }
 
     public void saveToFile(Path path) {
-        
         products.sort(Comparator.comparingInt(Product::getArticleNumber));
 
         List<String> lines = new ArrayList<>();
@@ -57,6 +52,7 @@ public class FileProductDao implements ProductUI {
                     p.getPrice(),
                     p.getDescription()));
         }
+
         try {
             Files.write(path, lines);
             System.out.println("Saved products to file");

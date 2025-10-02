@@ -8,6 +8,7 @@ public class Application {
     private ProductDao productDao;
     private FileProductDao fileProDao;
     private ScannerUI scannerUi;
+    private ProductInput productInput;
 
     Path productFile = Path.of("data/products.txt");
 
@@ -55,59 +56,30 @@ public class Application {
 
         switch (type) {
             case "books" -> {
-                scannerUi.question("Input article number");
-                int articleNumber = sc.nextInt();
-                sc.nextLine();
-
-                scannerUi.question("Input product name");
-                String productName = sc.nextLine();
-
-                scannerUi.question("Input product price");
-                String stringPrice = sc.nextLine();
-                double productPrice = Double.parseDouble(stringPrice);
-
-                scannerUi.question("Input product description");
-                String productDescription = sc.nextLine();
-
-                Product newBook = new Book(articleNumber, productName, productPrice, productDescription);
+                ProductInput input = makeProductQuestions();
+                Product newBook = new Book(input.articleNumber,
+                        input.productName,
+                        input.productPrice,
+                        input.productDescription);
                 fileProDao.addProduct(newBook);
                 fileProDao.saveToFile(productFile);
             }
             case "electronics" -> {
-                scannerUi.question("Input article number");
-                int articleNumber = sc.nextInt();
-                sc.nextLine();
-
-                scannerUi.question("Input product name");
-                String productName = sc.nextLine();
-
-                scannerUi.question("Input product price");
-                String stringPrice = sc.nextLine();
-                double productPrice = Double.parseDouble(stringPrice);
-
-                scannerUi.question("Input product description");
-                String productDescription = sc.nextLine();
-
-                Product newElectronic = new Electronic(articleNumber, productName, productPrice, productDescription);
+                ProductInput input = makeProductQuestions();
+                Product newElectronic = new Electronic(input.articleNumber,
+                        input.productName,
+                        input.productPrice,
+                        input.productDescription);
                 fileProDao.addProduct(newElectronic);
                 fileProDao.saveToFile(productFile);
             }
             case "tools" -> {
-                scannerUi.question("Input article number");
-                int articleNumber = sc.nextInt();
-                sc.nextLine();
+                ProductInput input = makeProductQuestions();
+                Product newTool = new Tool(input.articleNumber,
+                        input.productName,
+                        input.productPrice,
+                        input.productDescription);
 
-                scannerUi.question("Input product name");
-                String productName = sc.nextLine();
-
-                scannerUi.question("Input product price");
-                String stringPrice = sc.nextLine();
-                double productPrice = Double.parseDouble(stringPrice);
-
-                scannerUi.question("Input product description");
-                String productDescription = sc.nextLine();
-
-                Product newTool = new Tool(articleNumber, productName, productPrice, productDescription);
                 fileProDao.addProduct(newTool);
                 fileProDao.saveToFile(productFile);
             }
@@ -129,21 +101,21 @@ public class Application {
         }
     }
 
-//    public makeProductQuestions() {
-//        scannerUi.question("Input article number");
-//        int articleNumber = sc.nextInt();
-//        sc.nextLine();
-//
-//        scannerUi.question("Input product name");
-//        String productName = sc.nextLine();
-//
-//        scannerUi.question("Input product price");
-//        String stringPrice = sc.nextLine();
-//        double productPrice = Double.parseDouble(stringPrice);
-//
-//        scannerUi.question("Input product description");
-//        String productDescription = sc.nextLine();
-//
-//        return;
-//    }
+    private ProductInput makeProductQuestions() {
+        scannerUi.question("Input article number");
+        int articleNumber = sc.nextInt();
+        sc.nextLine();
+
+        scannerUi.question("Input product name");
+        String productName = sc.nextLine();
+
+        scannerUi.question("Input product price");
+        String stringPrice = sc.nextLine();
+        double productPrice = Double.parseDouble(stringPrice);
+
+        scannerUi.question("Input product description");
+        String productDescription = sc.nextLine();
+
+        return new ProductInput(articleNumber, productName, productPrice, productDescription);
+    }
 }
