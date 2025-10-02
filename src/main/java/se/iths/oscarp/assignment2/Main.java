@@ -7,7 +7,6 @@ import se.iths.oscarp.assignment2.model.ScannerUI;
 public class Main {
     public static void main(String[] args) {
 //        ProductDao proDao = new ProductDao();
-
         FileProductDao fileProDao = new FileProductDao();
 
         ScannerUI scannerUi = new ScannerUI();

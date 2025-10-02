@@ -12,7 +12,6 @@ public class Application {
 
     Path productFile = Path.of("data/products.txt");
 
-
     public Application(FileProductDao fileProDao, ScannerUI scannerUi) {
         this.fileProDao = fileProDao;
         this.scannerUi = scannerUi;
@@ -36,6 +35,7 @@ public class Application {
                     fileProDao.saveToFile(productFile);
                     onOff = false;
                 }
+                default -> scannerUi.error("Invalid choice");
             }
         }
     }
@@ -57,28 +57,24 @@ public class Application {
         switch (type) {
             case "books" -> {
                 ProductInput input = makeProductQuestions();
-                Product newBook = new Book(input.articleNumber,
-                        input.productName,
-                        input.productPrice,
-                        input.productDescription);
+                Product newBook = new Book(input.articleNumber, input.productName,
+                        input.productPrice, input.productDescription);
+
                 fileProDao.addProduct(newBook);
                 fileProDao.saveToFile(productFile);
             }
             case "electronics" -> {
                 ProductInput input = makeProductQuestions();
-                Product newElectronic = new Electronic(input.articleNumber,
-                        input.productName,
-                        input.productPrice,
-                        input.productDescription);
+                Product newElectronic = new Electronic(input.articleNumber, input.productName,
+                        input.productPrice, input.productDescription);
+
                 fileProDao.addProduct(newElectronic);
                 fileProDao.saveToFile(productFile);
             }
             case "tools" -> {
                 ProductInput input = makeProductQuestions();
-                Product newTool = new Tool(input.articleNumber,
-                        input.productName,
-                        input.productPrice,
-                        input.productDescription);
+                Product newTool = new Tool(input.articleNumber, input.productName,
+                        input.productPrice, input.productDescription);
 
                 fileProDao.addProduct(newTool);
                 fileProDao.saveToFile(productFile);
