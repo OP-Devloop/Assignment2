@@ -1,0 +1,9 @@
+book; 101; Are You Even Human Volume 1; 9,99; A book about a girl with a shapeshifter superpower
+book; 102; Deus Ex Machina Volume 1; 14,99; A superheroine goes back in time to save the world
+book; 103; The Perfect Run; 14,99; A superhero with the power to save and load like a game
+electronic; 201; Computer; 599,99; A good computer
+electronic; 202; Phone; 399,99; A good phone
+electronic; 203; Camera; 499,99; A small digital camera
+tool; 301; Wrench; 17,99; A metal wrench
+tool; 302; Utility Knife; 21,99; A normal utility knife
+tool; 303; Pliers; 19,99; Some good pilers

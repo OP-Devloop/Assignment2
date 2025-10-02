@@ -1,19 +1,25 @@
 package se.iths.oscarp.assignment2.model;
 
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Application {
     private Scanner sc = new Scanner(System.in);
     private ProductDao productDao;
+    private FileProductDao fileProDao;
     private ScannerUI scannerUi;
 
+    Path productFile = Path.of("data/products.txt");
 
-    public Application(ProductDao productDao, ScannerUI scannerUi) {
-        this.productDao = productDao;
+
+    public Application(FileProductDao fileProDao, ScannerUI scannerUi) {
+        this.fileProDao = fileProDao;
         this.scannerUi = scannerUi;
     }
 
     public void startApplication() {
+        fileProDao.ensureFileExists(productFile);
+        fileProDao.loadFromFile(productFile);
 
         boolean onOff = true;
         while (onOff) {
@@ -26,6 +32,7 @@ public class Application {
                 case 3 -> findProduct();
                 case 4 -> {
                     System.out.println("Exiting Application...");
+                    fileProDao.saveToFile(productFile);
                     onOff = false;
                 }
             }
@@ -33,7 +40,7 @@ public class Application {
     }
 
     public void printAllProducts() {
-        for (Product p : productDao.getAllProducts()) {
+        for (Product p : fileProDao.getAllProducts()) {
             System.out.println(p);
             p.category();
             System.out.println();
@@ -56,14 +63,15 @@ public class Application {
                 String productName = sc.nextLine();
 
                 scannerUi.question("Input product price");
-                double productPrice = sc.nextDouble();
-                sc.nextLine();
+                String stringPrice = sc.nextLine();
+                double productPrice = Double.parseDouble(stringPrice);
 
                 scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newBook = new Book(articleNumber, productName, productPrice, productDescription);
-                productDao.addProduct(newBook);
+                fileProDao.addProduct(newBook);
+                fileProDao.saveToFile(productFile);
             }
             case "electronics" -> {
                 scannerUi.question("Input article number");
@@ -74,14 +82,15 @@ public class Application {
                 String productName = sc.nextLine();
 
                 scannerUi.question("Input product price");
-                double productPrice = sc.nextDouble();
-                sc.nextLine();
+                String stringPrice = sc.nextLine();
+                double productPrice = Double.parseDouble(stringPrice);
 
                 scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newElectronic = new Electronic(articleNumber, productName, productPrice, productDescription);
-                productDao.addProduct(newElectronic);
+                fileProDao.addProduct(newElectronic);
+                fileProDao.saveToFile(productFile);
             }
             case "tools" -> {
                 scannerUi.question("Input article number");
@@ -92,30 +101,49 @@ public class Application {
                 String productName = sc.nextLine();
 
                 scannerUi.question("Input product price");
-                double productPrice = sc.nextDouble();
-                sc.nextLine();
+                String stringPrice = sc.nextLine();
+                double productPrice = Double.parseDouble(stringPrice);
 
                 scannerUi.question("Input product description");
                 String productDescription = sc.nextLine();
 
                 Product newTool = new Tool(articleNumber, productName, productPrice, productDescription);
-                productDao.addProduct(newTool);
+                fileProDao.addProduct(newTool);
+                fileProDao.saveToFile(productFile);
             }
             default -> scannerUi.error("Invalid choice.");
         }
     }
 
     public void findProduct() {
-        System.out.println("Enter product number");
+        scannerUi.question("Enter product number");
         int id = sc.nextInt();
         sc.nextLine();
-        Product productID = productDao.findProductById(id);
+        Product productID = fileProDao.findProductById(id);
         if (productID != null) {
             System.out.println("Product found: ");
             System.out.println(productID);
             productID.category();
         } else {
-            System.out.println("Product not found");
+            scannerUi.error("Product not found");
         }
     }
+
+//    public makeProductQuestions() {
+//        scannerUi.question("Input article number");
+//        int articleNumber = sc.nextInt();
+//        sc.nextLine();
+//
+//        scannerUi.question("Input product name");
+//        String productName = sc.nextLine();
+//
+//        scannerUi.question("Input product price");
+//        String stringPrice = sc.nextLine();
+//        double productPrice = Double.parseDouble(stringPrice);
+//
+//        scannerUi.question("Input product description");
+//        String productDescription = sc.nextLine();
+//
+//        return;
+//    }
 }
