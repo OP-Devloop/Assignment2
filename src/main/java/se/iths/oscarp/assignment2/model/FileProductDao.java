@@ -40,6 +40,7 @@ public class FileProductDao implements ProductUI {
     }
 
     public void saveToFile(Path path) {
+        // Sort products in list by article number
         products.sort(Comparator.comparingInt(Product::getArticleNumber));
 
         List<String> lines = new ArrayList<>();
@@ -63,9 +64,11 @@ public class FileProductDao implements ProductUI {
 
     public void ensureFileExists(Path path) {
         try {
+            // If File Parent does not exist then make it
             if (Files.notExists(path.getParent())) {
                 Files.createDirectories(path.getParent());
             }
+            // If File does not exist then make it
             if (Files.notExists(path)) {
                 Files.createFile(path);
             }
