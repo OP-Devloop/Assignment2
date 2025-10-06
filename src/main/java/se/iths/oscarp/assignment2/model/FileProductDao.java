@@ -18,6 +18,7 @@ public class FileProductDao implements ProductUI {
                 // Skip empty lines
                 if (line.isBlank()) continue;
 
+                // Split the line using " | " as the delimiter
                 String[] parts = line.split(" \\| ", 5);
                 if (parts.length < 5) continue;
 
