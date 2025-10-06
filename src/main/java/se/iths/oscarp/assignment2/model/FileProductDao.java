@@ -15,7 +15,10 @@ public class FileProductDao implements ProductUI {
         try {
             List<String> lines = Files.readAllLines(path);
             for (String line : lines) {
-                String[] parts = line.split(";", 5);
+                // Skip empty lines
+                if (line.isBlank()) continue;
+
+                String[] parts = line.split(" \\| ", 5);
                 if (parts.length < 5) continue;
 
                 String type = parts[0].trim().toLowerCase();
@@ -46,7 +49,7 @@ public class FileProductDao implements ProductUI {
         List<String> lines = new ArrayList<>();
         for (Product p : products) {
             String type = p.getClass().getSimpleName().toLowerCase();
-            lines.add(String.format("%s; %d; %s; %.2f; %s",
+            lines.add(String.format("%s | %d | %s | %.2f | %s",
                     type,
                     p.getArticleNumber(),
                     p.getName(),
