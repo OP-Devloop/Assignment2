@@ -1,9 +1,9 @@
-book; 101; Are You Even Human Volume 1; 9,99; A book about a girl with a shapeshifter superpower
-book; 102; Deus Ex Machina Volume 1; 14,99; A superheroine goes back in time to save the world
-book; 103; The Perfect Run; 14,99; A superhero with the power to save and load like a game
-electronic; 201; Computer; 599,99; A good computer
-electronic; 202; Phone; 399,99; A good phone
-electronic; 203; Camera; 499,99; A small digital camera
-tool; 301; Wrench; 17,99; A metal wrench
-tool; 302; Utility Knife; 21,99; A normal utility knife
-tool; 303; Pliers; 19,99; Some good pilers
+Type: book | ID: 101 | Name: Are You Even Human Volume 1 | Price: $9,99 | Description: A book about a girl with a shapeshifter superpower
+Type: book | ID: 102 | Name: Deus Ex Machina Volume 1 | Price: $14,99 | Description: A superheroine goes back in time to save the world
+Type: book | ID: 103 | Name: The Perfect Run | Price: $14,99 | Description: A superhero with the power to save and load like a game
+Type: electronic | ID: 201 | Name: Computer | Price: $599,99 | Description: A good computer
+Type: electronic | ID: 202 | Name: Phone | Price: $399,99 | Description: A good phone
+Type: electronic | ID: 203 | Name: Camera | Price: $499,99 | Description: A small digital camera
+Type: tool | ID: 301 | Name: Wrench | Price: $17,99 | Description: A metal wrench
+Type: tool | ID: 302 | Name: Utility Knife | Price: $21,99 | Description: A normal utility knife
+Type: tool | ID: 303 | Name: Pliers | Price: $19,99 | Description: Some good pilers

@@ -15,15 +15,23 @@ public class FileProductDao implements ProductUI {
         try {
             List<String> lines = Files.readAllLines(path);
             for (String line : lines) {
-                String[] parts = line.split(";", 5);
-                if (parts.length < 5) continue;
+                // Skip empty lines
+                if (line.isBlank()) continue;
 
-                String type = parts[0].trim().toLowerCase();
-                int articleNumber = Integer.parseInt(parts[1].trim());
-                String name = parts[2].trim();
-                String priceStr = parts[3].trim().replace(",", ".");
+                // Split the line using " | " as the delimiter
+                String[] parts = line.split(" \\| ");
+                if (parts.length < 5) continue; // Invalid format
+
+                // Extract and clean values from each part
+                String type = parts[0].replace("Type:", "").trim().toLowerCase();
+                String idStr = parts[1].replace("ID:", "").trim();
+                String name = parts[2].replace("Name:", "").trim();
+                String priceStr = parts[3].replace("Price:", "").replace("$", "").trim().replace(",", ".");
+                String description = parts[4].replace("Description:", "").trim();
+
+                // Parse numeric fields
+                int articleNumber = Integer.parseInt(idStr);
                 double price = Double.parseDouble(priceStr);
-                String description = parts[4].trim();
 
                 Product product = switch (type) {
                     case "book" -> new Book(articleNumber, name, price, description);
@@ -46,7 +54,7 @@ public class FileProductDao implements ProductUI {
         List<String> lines = new ArrayList<>();
         for (Product p : products) {
             String type = p.getClass().getSimpleName().toLowerCase();
-            lines.add(String.format("%s; %d; %s; %.2f; %s",
+            lines.add(String.format("Type: %s | ID: %d | Name: %s | Price: $%.2f | Description: %s",
                     type,
                     p.getArticleNumber(),
                     p.getName(),
